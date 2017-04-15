@@ -1,0 +1,134 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+article, footer, header, nav, section{
+    display: block;
+}
+
+body {
+    background: #C0C0C0 url(../img/fondo.jpg);
+    color: #FFF;
+    font-size: 1em;
+}
+
+.cube{
+    background: red;
+    margin-left: auto;
+    width: 7em;
+    height: 3em;
+}
+
+
+h1 a img{
+    width: 5em;
+}
+
+nav ul li{
+    display: inline-block;
+    padding: 0.1em;
+}
+
+a {
+    color: #800000;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+a:hover{
+    color: #f60;
+};
+
+#divMenu{
+    background: white;
+    z-index: 1;
+    position: absolute;
+}
+
+label{
+    color: black;
+}
+
+.boxed {
+  border: 1px solid black;
+  display: inline-block;
+  padding-right: 2em; 
+  padding-left: 2em; 
+  background: white;
+  width: 50%;
+}
+
+.boxed input[type="text"] textarea{
+    width: 100%;
+}
+
+.modal{
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+    padding-top: 3em; /* Location of the box */
+    margin: -5em 0 0 -10.2em;
+    width: 20em; /* Full width */
+    background-color: rgb(255,255,255); /* Fallback color */
+    border-style: solid;
+    border-color: black;
+}
+.modal-content {
+    margin: 0 auto;
+    display: block;
+    width: auto;
+    max-width: 100%;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#caption, #btnCerrarMsgBox {
+    margin: auto;
+    display: block;
+    max-width: 100%;
+    text-align: center;
+    padding: 0 auto;
+    color: black;
+}
+
+@-webkit-keyframes zoom {
+    from {-webkit-transform:scale(0)} 
+    to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+    from {transform:scale(0)} 
+    to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+    position: absolute;
+    top: 2%;
+    right: 5%;
+    color: black;
+    font-size: 2em;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+@media (min-width:0px) and (max-width:800px){
+    .boxed#menuIngresoAsociado{
+        width: 80%;
+        height: 20%;
+    }
+}
+
+th, tr{
+    color: black;
+}

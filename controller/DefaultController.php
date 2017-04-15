@@ -1,35 +1,14 @@
 <?php
 
-namespace controller;
-
-/**
- *
- */
 class DefaultController {
 
-    /**
-     *
-     */
-    public function __construct() {
+    private $model;
+
+    public function __contructu() {
         
     }
 
-    /**
-     * @var DefaultModel
-     */
-    private $model;
-
-    /**
-     *
-     */
-    public function __contructu() {
-        // TODO: implement here
-    }
-
-    /**
-     *
-     */
     public function invoke() {
-        // TODO: implement here
+        include 'view/indexView.php';
     }
 }
