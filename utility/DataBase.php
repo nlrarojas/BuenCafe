@@ -7,24 +7,15 @@ namespace utility;
  */
 class DataBase {
 
-    /**
-     *
-     */
-    public function __construct() {
-        
-    }
-
-    /**
-     * @return array
-     */
-    public function infoDB() {
+    public function getInfoDB() {
         return array(
-            "driver" => "",
-            "host" => "163.178.107.130",
-            "user" => "sqlserver",
-            "pass" => "saucr.12",
-            "database" => "db_buen_cafe",
-            "charset" => "utf8"
+            "DataBase" => "db_buen_cafe",
+            "UID" => "sqlserver",
+            "PWD" => "saucr.12",
         );
+    }
+    
+    public function getServerName(){
+        return "S-LABS\MSSQLSERVER";
     }
 }

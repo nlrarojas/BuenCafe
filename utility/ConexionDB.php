@@ -1,48 +1,38 @@
 <?php
+require_once 'DataBase.php';
 
-namespace utility;
-
-/**
- *
- */
 class ConexionDB {
 
-    /**
-     *
-     */
-    public function __construct() {
-        
-    }
-
-    /**
-     * @var void
-     */
     private $conexion;
-
-    /**
-     * @var void
-     */
     private $infoDB;
 
-    /**
-     *
-     */
-    public function __contruct() {
-        // TODO: implement here
+    public function __construct() {
+        $this->infoDB = new \utility\DataBase();
+        $conn = sqlsrv_connect($this->infoDB->getInfoDB(), $this->infoDB->getServerName());
+        echo "asdasd";
+        print("asdasd");
+        if ($conn) {
+            echo "Conexión establecida.<br />";
+        } else {
+            echo "Conexión no se pudo establecer.<br />";
+            die(print_r(sqlsrv_errors(), true));
+        }
     }
 
-    /**
-     *
-     */
     public function conectar() {
-        // TODO: implement here
+        return $this->conexion;
     }
 
-    /**
-     *
-     */
     public function desconcetar() {
-        // TODO: implement here
+        $this->conexion->close();
+        $conn = sqlsrv_connect($this->infoDB->getInfoDB(), $this->infoDB->getServerName());
+        
+        if ($conn) {
+            echo "Conexión establecida.<br />";
+        } else {
+            echo "Conexión no se pudo establecer.<br />";
+            die(print_r(sqlsrv_errors(), true));
+        }
+        return $this->conexion;
     }
-
 }

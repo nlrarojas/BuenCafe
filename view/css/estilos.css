@@ -7,6 +7,11 @@ article, footer, header, nav, section{
     display: block;
 }
 
+header, footer, #contenido {
+    vertical-align: central;
+    text-align: center;
+}
+
 body {
     background: #C0C0C0 url(../img/fondo.jpg);
     color: #FFF;
@@ -39,12 +44,6 @@ a {
 a:hover{
     color: #f60;
 };
-
-#divMenu{
-    background: white;
-    z-index: 1;
-    position: absolute;
-}
 
 label{
     color: black;

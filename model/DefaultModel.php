@@ -1,21 +1,14 @@
 <?php
-
-namespace model;
+require_once 'utility/ConexionDB.php';
 
 /**
  *
  */
 class DefaultModel {
 
-    /**
-     *
-     */
-    public function __construct() {
-        
-    }
-
-    /**
-     * @var void
-     */
     private $conexion;
+    
+    public function __construct() {
+        $this->conexion = new ConexionDB();
+    }
 }
