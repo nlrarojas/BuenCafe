@@ -1,6 +1,7 @@
 <?php
 
 class Cliente {
+    
     private $cedula;
     private $nombre;
     private $apellidos;
