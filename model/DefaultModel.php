@@ -17,7 +17,7 @@ class DefaultModel {
     }
 
     public function insertarProductoFactura($id_factura, $nombre){
-        $procedimiento = "insertar_Factura_producto @facturaId = ?, @productoNombre = ?";
+        $procedimiento = "EXEC Actualizar_Inventario @facturaId = ?, @productoNombre = ?";
         
         $parametros = array(
             array(&$id_factura, SQLSRV_PARAM_IN),
@@ -30,7 +30,7 @@ class DefaultModel {
             echo "Error in executing statement 3.\n";
             die(print_r(sqlsrv_errors(), true));
         }
-        $rows = sqlsrv_execute($query);   
+        sqlsrv_query($this->conn, $procedimiento, $parametros);   
     }
 
     public function insertarCliente($nuevoCliente) {

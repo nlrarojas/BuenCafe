@@ -47,8 +47,13 @@ class DefaultController {
         }
         
         if (isset($_GET['InsertarProductoFactura'])) {
-            $this->model->insertarProductoFactura($_POST["id_factura"], $_POST["nombreProducto"]);
-            include 'view/InsertarProductoFactura.php';
+            if($_GET['InsertarProductoFactura']== "ingresar"){
+                $this->model->insertarProductoFactura($_POST["id_factura"], $_POST["nombreProducto"]);
+                $resultadoBusqueda = $this->model->obtenerInventario();
+                include 'view/Inventario.php';
+            }else{
+                include 'view/InsertarProductoFactura.php';
+            }
         }
         
         if (isset($_GET['Inventario'])) {
