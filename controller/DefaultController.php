@@ -29,6 +29,10 @@ class DefaultController {
             include 'view/EliminarClientes.php';
         }
         
+        if (isset($_GET['InsertarProductoFactura'])) {
+            include 'view/InsertarProductoFactura.php';
+        }
+        
         if (isset($_GET['Inventario'])) {
              $resultadoBusqueda = $this->model->obtenerInventario();
             include 'view/Inventario.php';
