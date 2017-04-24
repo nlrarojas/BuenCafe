@@ -2,6 +2,7 @@
 
 include_once 'model/DefaultModel.php';
 include_once 'core/Cliente.php';
+include_once 'core/Inventory.php';
 
 class DefaultController {
 
@@ -27,6 +28,12 @@ class DefaultController {
         if (isset($_GET['EliminarCliente'])) {
             include 'view/EliminarClientes.php';
         }
+        
+        if (isset($_GET['Inventario'])) {
+             $resultadoBusqueda = $this->model->obtenerInventario();
+            include 'view/Inventario.php';
+        }
+        
         if (isset($_GET['BuscarCliente'])) {
             if($_GET["BuscarCliente"] == "buscar"){
                 $cedulaCliente = $_POST["tCedula"];
