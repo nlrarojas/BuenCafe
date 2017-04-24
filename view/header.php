@@ -27,17 +27,17 @@
                     <img alt="" src="view/img/logo.png" />
                 </a>
             </h1>
-            <div id="divMenu">
+            <div >
                 <nav>
                     <ul>
-                        <li><a href="index.php">Inicio</a></li>
-                        <li><a href="?Ventas">Ventas</a></li>
-                        <li><a href="?Inventario">Inventario</a></li>
-                        <li><a href="?Reporte">Reporte</a></li>
-                        <li><a href="?InsertarClientes">Insertar Clientes</a></li>
-                        <li><a href="?InsertarVendedores">Vendedores</a></li>
-                        <li><a href="?InsertarProductos">Productos</a></li>
-                        <li><a href="?InsertarAdministrador">Productos</a></li>
+                        <div class="btn-group">
+                        <li><a class="btn btn-primary"  href="index.php">Inicio</a></li>
+                        <li><a class="btn btn-primary" href="?Inventario">Inventario</a></li>
+                        <li><a class="btn btn-primary" href="?Reporte">Reporte</a></li>
+                        <li><a class="btn btn-primary" href="?InsertarClientes">Insertar Clientes</a></li>
+                        <li><a class="btn btn-primary" href="?InsertarProductos">Productos</a></li>
+                        <li><a class="btn btn-primary" href="?InsertarProductoFactura">Producto Asociado a Factura</a></li>
+                        </div>
                     </ul>
                 </nav>	
             </div>
