@@ -16,6 +16,12 @@ class DefaultModel {
         $this->conn = $this->conexion->conectar();
     }
 
+    public function insertarProductoFactura($array){
+        
+    }
+
+
+    
     public function insertarCliente($nuevoCliente) {
         $cedulaCliente = $nuevoCliente->getCedula();
         $nombreCliente = $nuevoCliente->getNombre();
