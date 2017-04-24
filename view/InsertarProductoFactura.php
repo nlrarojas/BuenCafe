@@ -11,7 +11,7 @@ include_once 'header.php';
                 <div class="col-sm-4">
                     <div class="boxed" id="divContenedorIngreso">
                         <br/><br/><br/>
-                        <form action="?InsertarClientes=ingresar" method="post">
+                        <form action="?InsertarProductoFactura=ingresar" method="post">
                             <div class="form-group">
                                 <label>Ingrese La factura y el producro asociado</label>
                                 <label for="id_factura">Identificacion de la factura</label>

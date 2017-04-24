@@ -16,12 +16,23 @@ class DefaultModel {
         $this->conn = $this->conexion->conectar();
     }
 
-    public function insertarProductoFactura($array){
+    public function insertarProductoFactura($id_factura, $nombre){
+        $procedimiento = "insertar_Factura_producto @facturaId = ?, @productoNombre = ?";
         
+        $parametros = array(
+            array(&$id_factura, SQLSRV_PARAM_IN),
+            array(&$nombre, SQLSRV_PARAM_IN),
+        );
+        
+        $query = sqlsrv_prepare($this->conn, $procedimiento, $parametros);
+
+        if ($query === false) {
+            echo "Error in executing statement 3.\n";
+            die(print_r(sqlsrv_errors(), true));
+        }
+        $rows = sqlsrv_execute($query);   
     }
 
-
-    
     public function insertarCliente($nuevoCliente) {
         $cedulaCliente = $nuevoCliente->getCedula();
         $nombreCliente = $nuevoCliente->getNombre();
@@ -31,6 +42,7 @@ class DefaultModel {
         $premiosCliente = 0;
 
         $procedimiento = "EXEC sp_insertar_cliente @cedula_ = ?, @nombre_ = ?, @apellidos_ = ?, @fecha_nacimiento_ = ?, @puntaje_acumulado_ = ?, @premios_canjeados_ = ?";
+        
         $parametros = array(
             array(&$cedulaCliente, SQLSRV_PARAM_IN),
             array(&$nombreCliente, SQLSRV_PARAM_IN),
