@@ -8,10 +8,9 @@ include_once 'header.php';
         <article id="contenidoIngresoAsociado">
             <div class="row">
                 <div class="col-sm-4"></div>
-                </div> <div class="col-sm-4">
+                <div class="col-sm-4">
                     <div class="boxed" id="divContenedorIngreso">
                         <br/><br/><br/>
-
                         <form action="?InsertarClientes=ingresar" method="post">
                             <div class="form-group">
                                 <label>Ingrese La factura y el producro asociado</label>
@@ -27,6 +26,7 @@ include_once 'header.php';
                     </div>
                     <div class="col-sm-4"></div>
                 </div>
+               </div> 
             </div>
         </article>		
     </section>
