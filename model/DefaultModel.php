@@ -40,8 +40,5 @@ class DefaultModel {
             die(print_r(sqlsrv_errors(), true));
         }
         $rows = sqlsrv_execute($query);
-        var_dump($rows);
-        die;
-        $arr[] = sqlsrv_fetch_array($rows, SQLSRV_FETCH_ASSOC);
     }
 }
