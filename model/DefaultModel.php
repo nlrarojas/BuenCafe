@@ -138,7 +138,7 @@ class DefaultModel {
 
         $inventario = array();
         while($arr = sqlsrv_fetch_array($rows, SQLSRV_FETCH_ASSOC)){
-                $inventarioEncontrado = new Inventory($arr["producto_nombre"], $arr["cant_existencia"], $arr["cant_vendida"], $arr["cant_adquirida"]);                        
+            $inventarioEncontrado = new Inventory($arr["producto_nombre"], $arr["cant_existencia"], $arr["cant_vendida"], $arr["cant_adquirida"]);                        
             array_push($inventario, $inventarioEncontrado);
         }
         return $inventario;
