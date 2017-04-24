@@ -14,22 +14,42 @@ include_once 'header.php';
             </div>
             <div class="boxed" id="divContenedorIngreso">
                 <br/><br/><br/>
-                <form action="?EliminarCliente=eliminar" method="post">
-                    <label>Ingrese la cédula del cliente para eliminar:</label><br/><br/><br/>
-                    
-                    <form action="?EliminarCliente=buscar" method="post">
+                <form action="?EliminarCliente=buscar" method="post">
+                        <label>Ingrese la cédula del cliente que desea eliminar:</label><br/><br/><br/>
                         <label for="tCedula">Cédula</label>
-                        <input type="submit" id="bIngresar" name="bIngresar" value="Ingresar"/>
+                        <?php
+                        if (isset($resultadoBusqueda)) {
+                            ?>
+                            <input type="text" id="tCedula" name="tCedula" value="<?php echo $resultadoBusqueda->getCedula(); ?>"/><br/><br/>
+                            <?php
+                        }else{
+                            ?>
+                            <input type="text" id="tCedula" name="tCedula" required/><br/><br/>
+                            <?php
+                        }
+                        ?>
+                        <input type="submit" id="bIngresar" name="bIngresar" value="Buscar"/><br/><br/><br/>
                     </form>
-                    <input type="text" id="tCedula" name="tCedula" required readonly="true"/><br/><br/>
-                    <label for="tNombre">Nombre</label>
-                    <input type="text" id="tNombre" name="tNombre" required readonly="true"/><br/><br/>
-                    <label for="tApellidos">Apellidos</label>
-                    <input type="text" id="tApellidos" name="tApellidos" required readonly="true"/><br/><br/>                    
-                    <label for="tFecha">Fecha de nacimiento</label><br/><br/>
-                    <input type="date" id="tFecha" name="tFecha" required readonly="true"/><br/><br/>
-                    
-                    <input type="submit" id="bIngresar" name="bIngresar" value="Ingresar"/>
+                <form action="?EliminarCliente=eliminar&cedula=<?php echo $resultadoBusqueda->getCedula(); ?>" method="post">
+                    <?php
+                    if (isset($resultadoBusqueda)) {
+                        ?>
+                        <label for="tNombre">Nombre</label>
+                        <input type="text" id="tNombre" name="tNombre" value="<?php echo $resultadoBusqueda->getNombre(); ?>"/><br/><br/>
+                        <label for="tApellidos">Apellidos</label>
+                        <input type="text" id="tApellidos" name="tApellidos" value="<?php echo $resultadoBusqueda->getApellidos(); ?>"/><br/><br/>
+                        <label for="tFecha">Fecha de nacimiento</label><br/><br/>
+                        <input type="date" id="tFecha" name="tFecha" value="<?php echo $resultadoBusqueda->getFechaNacimiento(); ?>"/><br/><br/>
+                        <label for="tPuntaje">Puntaje acumulado</label>
+                        <input type="text" id="tPuntaje" name="tPuntaje" value="<?php echo $resultadoBusqueda->getPuntajeAcumulado(); ?>"/><br/><br/>
+                        <label for="tApellidos">Premios canjeados</label>
+                        <input type="text" id="tPremios" name="tPremios" value="<?php echo $resultadoBusqueda->getPremiosCanjeados(); ?>"/><br/><br/>                        
+
+                        <input type="submit" id="bIngresar" name="bIngresar" value = "Eliminar"/>
+                        <?php
+                    }
+                    ?>
+
                 </form>
                 <br/><br/><br/>
             </div>
