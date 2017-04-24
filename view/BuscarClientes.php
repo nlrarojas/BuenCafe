@@ -53,6 +53,7 @@ include_once 'header.php';
                                     <td> <?php echo $resultadoBusqueda->getPuntajeAcumulado(); ?></td>
                                     <td> <?php echo $resultadoBusqueda->getPremiosCanjeados(); ?></td>
                                     <td><a href="?BuscarCliente=buscar&modificarCliente=<?php echo $resultadoBusqueda->getCedula(); ?>"> Modificar</a></td>
+                                    <td><a href="?BuscarCliente=buscar&eliminarCliente=<?php echo $resultadoBusqueda->getCedula(); ?>">Eliminar</a></td>
                                 </tr>
                                 <?php
                             }else{
