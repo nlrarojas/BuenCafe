@@ -47,6 +47,7 @@ class DefaultController {
         }
         
         if (isset($_GET['InsertarProductoFactura'])) {
+            $this->model->insertarProductoFactura($_POST["id_factura"], $_POST["nombreProducto"]);
             include 'view/InsertarProductoFactura.php';
         }
         
