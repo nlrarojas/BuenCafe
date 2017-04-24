@@ -26,7 +26,7 @@ include_once 'header.php';
                     </div>
                     <div class="col-sm-4"></div>
                 </div>
-               </div> 
+            </div> 
             </div>
         </article>		
     </section>
