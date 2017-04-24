@@ -8,7 +8,7 @@ include_once 'header.php';
     <section id="principal">
         <article id="contenidoIngresoAsociado">
             <div class="boxed" id="menuIngresoAsociado"><br/>
-                <span><a href="InsertarClientes"><div>Insertar cliente</div></a></span><br/>
+                <span><a href="?InsertarClientes"><div>Insertar cliente</div></a></span><br/>
                 <span><a href="?BuscarCliente"><div>Buscar cliente</div></a></span><br/>
                 <span><a href="?EliminarCliente"><div>Eliminar cliente</div></a></span>
             </div>

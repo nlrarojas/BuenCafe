@@ -156,3 +156,7 @@ th, tr{
     width: auto;
     min-width: 20em;
 }
+
+#tablaClientes tbody tr td{
+    text-align: center;
+}

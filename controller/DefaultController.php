@@ -28,6 +28,14 @@ class DefaultController {
             include 'view/EliminarClientes.php';
         }
         if (isset($_GET['BuscarCliente'])) {
+            if($_GET["BuscarCliente"] == "buscar"){
+                $cedulaCliente = $_POST["tCedula"];
+                if($cedulaCliente == ""){
+                    $resultadoBusqueda = $this->model->buscarTodosLosClientes();
+                }else{
+                    $resultadoBusqueda = $this->model->buscarCliente($cedulaCliente);
+                }
+            }
             include 'view/BuscarClientes.php';
         } else {
             include 'view/indexView.php';

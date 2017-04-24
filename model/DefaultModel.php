@@ -40,5 +40,49 @@ class DefaultModel {
             die(print_r(sqlsrv_errors(), true));
         }
         $rows = sqlsrv_execute($query);
+//        var_dump($rows);
+//        die;
+//        $arr[] = sqlsrv_fetch_array($rows, SQLSRV_FETCH_ASSOC);
+    }
+    
+    public function buscarCliente ($cedulaCliente){
+        $procedimiento = "EXEC sp_obtener_cliente @cedula_cliente_ = ?";
+        $parametros = array(
+            array(&$cedulaCliente, SQLSRV_PARAM_IN),
+            );
+
+        $query = sqlsrv_prepare($this->conn, $procedimiento, $parametros);
+        
+        if ($query === false) {
+            echo "Error in executing statement 3.\n";
+            die(print_r(sqlsrv_errors(), true));
+        }
+        $rows = sqlsrv_query($this->conn, $procedimiento, $parametros);
+
+        $arr[] = sqlsrv_fetch_array($rows, SQLSRV_FETCH_ASSOC);
+        
+        foreach ($arr as $cliente){
+            $clienteEncontrado = new Cliente($cliente["cedula"], $cliente["nombre"], $cliente["apellidos"], $cliente["fecha_nacimiento"]->format("Y-m-d"), $cliente["puntaje_acumulado"], $cliente["premios_canjeados"]);                        
+        }
+        return $clienteEncontrado;
+    }
+    
+    public function buscarTodosLosClientes(){
+        $procedimiento = "EXEC sp_obtener_clientes";
+
+        $query = sqlsrv_prepare($this->conn, $procedimiento);
+        
+        if ($query === false) {
+            echo "Error in executing statement 3.\n";
+            die(print_r(sqlsrv_errors(), true));
+        }
+        $rows = sqlsrv_query($this->conn, $procedimiento);
+
+        $clientes = array();
+        while($arr = sqlsrv_fetch_array($rows, SQLSRV_FETCH_ASSOC)){
+            $clienteEncontrado = new Cliente($arr["cedula"], $arr["nombre"], $arr["apellidos"], $arr["fecha_nacimiento"]->format("Y-m-d"), $arr["puntaje_acumulado"], $arr["premios_canjeados"]);                        
+            array_push($clientes, $clienteEncontrado);
+        }
+        return $clientes;
     }
 }

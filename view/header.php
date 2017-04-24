@@ -26,7 +26,7 @@
                         <li><a href="?Ventas">Ventas</a></li>
                         <li><a href="?Inventario">Inventario</a></li>
                         <li><a href="?Reporte">Reporte</a></li>
-                        <li><a href="?InsertarClientes">Clientes</a></li>
+                        <li><a href="?InsertarClientes">Insertar Clientes</a></li>
                         <li><a href="?InsertarVendedores">Vendedores</a></li>
                         <li><a href="?InsertarProductos">Productos</a></li>
                         <li><a href="?InsertarAdministrador">Productos</a></li>
