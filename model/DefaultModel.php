@@ -130,7 +130,7 @@ class DefaultModel {
         }        
         $rows = sqlsrv_query($this->conn, $procedimiento, $parametros);
     }
-}
+
     public function obtenerInventario(){
         $procedimiento = "sp_obtener_todo_inventario";
 
@@ -149,6 +149,5 @@ class DefaultModel {
         }
         return $inventario;
     }
-    
-    
+      
 }
