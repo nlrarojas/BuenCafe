@@ -12,10 +12,11 @@ class DataBase {
             "DataBase" => "db_buen_cafe",
             "UID" => "sqlserver",
             "PWD" => "saucr.12",
+            "CharacterSet" => "UTF-8"
         );
     }
     
     public function getServerName(){
-        return "S-LABS\MSSQLSERVER";
+        return "163.178.107.130";
     }
 }

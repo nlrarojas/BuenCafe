@@ -23,7 +23,12 @@
                 <nav>
                     <ul>
                         <li><a href="index.php">Inicio</a></li>
-                        <li><a href="">Ventas</a></li>
+                        <li><a href="?Ventas">Ventas</a></li>
+                        <li><a href="">Inventario</a></li>
+                        <li><a href="">Reporte</a></li>
+                        <li><a href="?Clientes">Clientes</a></li>
+                        <li><a href="">Vendedores</a></li>
+                        <li><a href="">Productos</a></li>
                     </ul>
                 </nav>	
             </div>

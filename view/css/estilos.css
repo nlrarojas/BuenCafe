@@ -25,9 +25,8 @@ body {
     height: 3em;
 }
 
-
 h1 a img{
-    width: 5em;
+    width: 11em;
 }
 
 nav ul li{
@@ -46,6 +45,10 @@ a:hover{
 };
 
 label{
+    color: black;
+}
+
+#divContenedorIngreso label{
     color: black;
 }
 
@@ -130,4 +133,26 @@ label{
 
 th, tr{
     color: black;
+}
+
+.boxed#menuIngresoAsociado{
+    background: white;
+    vertical-align: top;
+    width: 8em;
+    height: 8em;
+}
+
+.boxed#menuIngresoAsociado a{
+    color: black;
+}
+
+.boxed#menuIngresoAsociado a:hover{
+    color: blue;
+}
+
+#divContenedorIngreso{
+    text-align: left;
+    vertical-align: middle;
+    width: auto;
+    min-width: 20em;
 }
