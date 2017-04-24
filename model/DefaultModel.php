@@ -23,12 +23,9 @@ class DefaultModel {
 
     
     public function insertarCliente($nuevoCliente) {
-        $cedulaCliente = $nuevoCliente->getCedula();
-        $nombreCliente = $nuevoCliente->getNombre();
-        $apellidosCliente = $nuevoCliente->getApellidos();
-        $fechaCliente = $nuevoCliente->getFechaNacimiento();
-        $puntajeCliente = 0;
-        $premiosCliente = 0;
+        $cedulaCliente = $nuevoCliente->getCedula(); $nombreCliente = $nuevoCliente->getNombre();
+        $apellidosCliente = $nuevoCliente->getApellidos(); $fechaCliente = $nuevoCliente->getFechaNacimiento();
+        $puntajeCliente = 0; $premiosCliente = 0;
 
         $procedimiento = "EXEC sp_insertar_cliente @cedula_ = ?, @nombre_ = ?, @apellidos_ = ?, @fecha_nacimiento_ = ?, @puntaje_acumulado_ = ?, @premios_canjeados_ = ?";
         $parametros = array(
@@ -46,7 +43,7 @@ class DefaultModel {
             echo "Error in executing statement 3.\n";
             die(print_r(sqlsrv_errors(), true));
         }
-        $rows = sqlsrv_execute($query);
+        sqlsrv_execute($query);
     }
     
     public function buscarCliente ($cedulaCliente){
@@ -93,12 +90,9 @@ class DefaultModel {
     }
     
     public function modificarCliente($cliente){
-        $cedula = $cliente->getCedula();
-        $nombre = $cliente->getNombre();
-        $apellidos = $cliente->getApellidos();
-        $fecha = $cliente->getFechaNacimiento();
-        $puntaje = $cliente->getPuntajeAcumulado();
-        $premios = $cliente->getPremiosCanjeados();
+        $cedula = $cliente->getCedula(); $nombre = $cliente->getNombre();
+        $apellidos = $cliente->getApellidos(); $fecha = $cliente->getFechaNacimiento();
+        $puntaje = $cliente->getPuntajeAcumulado(); $premios = $cliente->getPremiosCanjeados();
 
         $procedimiento = "EXEC sp_modificar_cliente @cedula_cliente_ = ?, @nombre_cliente_ = ?, @apellidos_cliente_ = ?, @fecha_nacimiento_cliente_ = ?, @puntaje_acumulado_ = ?, @premios_canjeados_ = ?";
         $parametros = array(
@@ -114,7 +108,7 @@ class DefaultModel {
             echo "Error in executing statement 3.\n";
             die(print_r(sqlsrv_errors(), true));
         }        
-        $rows = sqlsrv_query($this->conn, $procedimiento, $parametros);
+        sqlsrv_query($this->conn, $procedimiento, $parametros);
     }
     
     public function eliminarCliente($idCliente){
@@ -128,7 +122,7 @@ class DefaultModel {
             echo "Error in executing statement 3.\n";
             die(print_r(sqlsrv_errors(), true));
         }        
-        $rows = sqlsrv_query($this->conn, $procedimiento, $parametros);
+        sqlsrv_query($this->conn, $procedimiento, $parametros);
     }
 
     public function obtenerInventario(){
