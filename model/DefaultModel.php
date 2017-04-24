@@ -40,9 +40,6 @@ class DefaultModel {
             die(print_r(sqlsrv_errors(), true));
         }
         $rows = sqlsrv_execute($query);
-//        var_dump($rows);
-//        die;
-//        $arr[] = sqlsrv_fetch_array($rows, SQLSRV_FETCH_ASSOC);
     }
     
     public function buscarCliente ($cedulaCliente){
@@ -60,9 +57,11 @@ class DefaultModel {
         $rows = sqlsrv_query($this->conn, $procedimiento, $parametros);
 
         $arr[] = sqlsrv_fetch_array($rows, SQLSRV_FETCH_ASSOC);
-        
-        foreach ($arr as $cliente){
-            $clienteEncontrado = new Cliente($cliente["cedula"], $cliente["nombre"], $cliente["apellidos"], $cliente["fecha_nacimiento"]->format("Y-m-d"), $cliente["puntaje_acumulado"], $cliente["premios_canjeados"]);                        
+        $clienteEncontrado = null;
+        if (!empty($arr[0])){
+            foreach ($arr as $cliente) {
+                $clienteEncontrado = new Cliente($cliente["cedula"], $cliente["nombre"], $cliente["apellidos"], $cliente["fecha_nacimiento"]->format("Y-m-d"), $cliente["puntaje_acumulado"], $cliente["premios_canjeados"]);
+            }
         }
         return $clienteEncontrado;
     }
@@ -84,5 +83,44 @@ class DefaultModel {
             array_push($clientes, $clienteEncontrado);
         }
         return $clientes;
+    }
+    
+    public function modificarCliente($cliente){
+        $cedula = $cliente->getCedula();
+        $nombre = $cliente->getNombre();
+        $apellidos = $cliente->getApellidos();
+        $fecha = $cliente->getFechaNacimiento();
+        $puntaje = $cliente->getPuntajeAcumulado();
+        $premios = $cliente->getPremiosCanjeados();
+
+        $procedimiento = "EXEC sp_modificar_cliente @cedula_cliente_ = ?, @nombre_cliente_ = ?, @apellidos_cliente_ = ?, @fecha_nacimiento_cliente_ = ?, @puntaje_acumulado_ = ?, @premios_canjeados_ = ?";
+        $parametros = array(
+            array(&$cedula, SQLSRV_PARAM_IN),
+            array(&$nombre, SQLSRV_PARAM_IN),
+            array(&$apellidos, SQLSRV_PARAM_IN),
+            array(&$fecha, SQLSRV_PARAM_IN),
+            array(&$puntaje, SQLSRV_PARAM_IN),
+            array(&$premios, SQLSRV_PARAM_IN)
+        );
+        $query = sqlsrv_prepare($this->conn, $procedimiento, $parametros);        
+        if ($query === false) {
+            echo "Error in executing statement 3.\n";
+            die(print_r(sqlsrv_errors(), true));
+        }        
+        $rows = sqlsrv_query($this->conn, $procedimiento, $parametros);
+    }
+    
+    public function eliminarCliente($idCliente){
+        $procedimiento = "EXEC sp_eliminar_cliente @cedula_cliente_ = ?";
+        $parametros = array(
+            array(&$idCliente, SQLSRV_PARAM_IN)
+        );
+        
+        $query = sqlsrv_prepare($this->conn, $procedimiento, $parametros);        
+        if ($query === false) {
+            echo "Error in executing statement 3.\n";
+            die(print_r(sqlsrv_errors(), true));
+        }        
+        $rows = sqlsrv_query($this->conn, $procedimiento, $parametros);
     }
 }
