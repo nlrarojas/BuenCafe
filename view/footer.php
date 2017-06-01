@@ -1,6 +1,6 @@
         <footer>
             <div id="divFooter">
-                <br/><br/>
+                <br/><br/><br/>
                 <p>
                     Cafetería Buen Café<br/>
                     Nelson Rojas, Juan Carlos Mora<br/>

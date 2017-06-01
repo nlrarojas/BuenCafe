@@ -98,6 +98,53 @@ class DefaultController {
             }
             include 'view/InsertarEmpleado.php';
         }
+        if(isset($_GET['BuscarEmpleado'])){
+            if($_GET['BuscarEmpleado'] == 'buscar'){
+                if(isset($_GET["modificarEmpleado"])){
+                    $idEmpleado = $_GET["modificarEmpleado"];                    
+                    $resultadoBusqueda = $this->model->buscarEmpleado($idEmpleado);
+                    include 'view/ModificarEmpleado.php';
+                } else if(isset($_GET["eliminarEmpleado"])){
+                    $idEmpleado = $_GET["eliminarEmpleado"];
+                    $resultadoBusqueda = $this->model->buscarEmpleado($idEmpleado);
+                    include 'view/EliminarEmpleado.php';
+                } else{
+                    $idEmpleado = $_POST["tCedula"];                    
+                    if($idEmpleado == ""){
+                        $resultadoBusqueda = $this->model->buscarTodosLosEmpleados();                    
+                    }else{                        
+                        $resultadoBusqueda = $this->model->buscarEmpleado($idEmpleado);
+                    }
+                    include 'view/BuscarEmpleado.php';
+                }
+            }else{
+                include 'view/BuscarEmpleado.php';
+            }
+        }
+        if(isset($_GET['EliminarEmpleado'])){
+            if($_GET["EliminarEmpleado"] == "eliminar"){
+                $idEmpleado= $_GET["id"];                
+                $this->model->eliminarEmpleado($idEmpleado);
+            }
+            if($_GET["EliminarEmpleado"] == "buscar"){
+                $idEmpleado = $_POST["tCedula"];
+                $resultadoBusqueda = $this->model->buscarEmpleado($idEmpleado);                
+                
+            }
+            include 'view/EliminarEmpleado.php';
+        }
+        if(isset($_GET['ModificarEmpleado'])){
+            if($_GET["ModificarEmpleado"] == "modificar"){
+                $idEmpleado = $_GET["id"];
+                $empleadoModificar = new Empleado($idEmpleado, $_POST["tNombre"], $_POST["tApellidos"], $_POST["tFecha"]);
+                $this->model->modificarEmpleado($empleadoModificar);
+            }
+            if($_GET["ModificarEmpleado"] == "buscar"){
+                $idEmpleado = $_POST["tCedula"];
+                $resultadoBusqueda = $this->model->buscarEmpleado($idEmpleado);
+            }
+            include 'view/ModificarEmpleado.php';
+        }
         if(isset($_GET['InsertarProductos'])){
             
         }
