@@ -48,7 +48,7 @@ class DefaultModel {
             array(&$apellidosCliente, SQLSRV_PARAM_IN),
             array(&$fechaCliente, SQLSRV_PARAM_IN),
             array(&$puntajeCliente, SQLSRV_PARAM_IN),
-            array(&$premiosCliente, SQLSRV_PARAM_IN),
+            array(&$premiosCliente, SQLSRV_PARAM_IN)
         );
 
         $query = sqlsrv_prepare($this->conn, $procedimiento, $parametros);
@@ -341,4 +341,31 @@ class DefaultModel {
         return $empleadoMes;
     }
 
+    public function insertarProducto($nuevoProducto) {
+        $nombreProducto = $nuevoProducto->getNombre();
+        $descripcion = $nuevoProducto->getDescripcion();
+        $precioProducto = $nuevoProducto->getPrecio();
+        $valorPuntos = $nuevoProducto->getValorPuntos();
+        $puntosOtorga = $nuevoProducto->getPuntosOtorga();
+        $cedulaAdministrador = $nuevoProducto->getCedulaAdministrador();
+        
+        $procedimiento = "EXEC sp_insertar_producto @nombre_ = ?, @descripcion_ = ?, @precio_ = ?, @valor_en_puntos_ = ?, @puntos_otorgados_ = ?, @cedula_administrador = ?";        
+	
+        $parametros = array(
+            array(&$nombreProducto, SQLSRV_PARAM_IN),
+            array(&$descripcion, SQLSRV_PARAM_IN),
+            array(&$$precioProducto, SQLSRV_PARAM_IN),
+            array(&$valorPuntos, SQLSRV_PARAM_IN),
+            array(&$puntosOtorga, SQLSRV_PARAM_IN),
+            array(&$cedulaAdministrador, SQLSRV_PARAM_IN),
+        );
+
+        $query = sqlsrv_prepare($this->conn, $procedimiento, $parametros);
+        
+        if ($query == false) {
+            echo "Error in executing statement 3.\n";
+            die(print_r(sqlsrv_errors(), true));
+        }
+        sqlsrv_execute($query);
+    }
 }

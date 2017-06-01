@@ -3,6 +3,7 @@
 include_once 'model/DefaultModel.php';
 include_once 'core/Cliente.php';
 include_once 'core/Empleado.php';
+include_once 'core/Producto.php';
 include_once 'core/Inventory.php';
 
 class DefaultController {
@@ -146,7 +147,11 @@ class DefaultController {
             include 'view/ModificarEmpleado.php';
         }
         if(isset($_GET['InsertarProductos'])){
-            
+            if($_GET['InsertarProductos'] == "ingresar"){
+                $nuevoProducto = new Producto($_POST['tNombre'], $_POST['tDescripcion'], $_POST['tPrecio'], $_POST['tPuntos'], $_POST['tOtorga'], $_POST['tCedulaAdmin']);
+                $this->model->insertarProducto($nuevoProducto);
+            }
+            include 'view/InsertarProducto.php';
         }
         if (isset($_GET['EmpleadoMes'])) {
             if($_GET["EmpleadoMes"] == "empleadomes"){
