@@ -36,7 +36,7 @@
                         <li><a class="btn btn-primary" href="?insertarEmpleado">Empleados</a></li>
                         <li><a class="btn btn-primary" href="?InsertarClientes">Clientes</a></li>
                         <li><a class="btn btn-primary" href="?InsertarProductos">Productos</a></li>
-                        <li><a class="btn btn-primary" href="?facturar">Facturar</a></li>
+                        <li><a class="btn btn-primary" href="?ModificarInventario">Modificar inventario</a></li>
                         <li><a class="btn btn-primary" href="?EmpleadoMes">Empleado del mes</a></li>
                         <li><a class="btn btn-primary" href="?InsertarProductoFactura">Producto Asociado a Factura</a></li>
                         </div>

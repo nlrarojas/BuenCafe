@@ -341,23 +341,23 @@ class DefaultModel {
         return $empleadoMes;
     }
 
-    public function insertarProducto($nuevoProducto) {
-        $nombreProducto = $nuevoProducto->getNombre();
-        $descripcion = $nuevoProducto->getDescripcion();
-        $precioProducto = $nuevoProducto->getPrecio();
-        $valorPuntos = $nuevoProducto->getValorPuntos();
-        $puntosOtorga = $nuevoProducto->getPuntosOtorga();
-        $cedulaAdministrador = $nuevoProducto->getCedulaAdministrador();
+    public function insertarProducto($producto) {
+        $nombre = $producto->getNombre();
+        $descripcion = $producto->getDescripcion();
+        $precio = $producto->getPrecio();
+        $puntos = $producto->getValorPuntos();
+        $otorga = $producto->getPuntosOtorga();
+        $cedula = $producto->getCedulaAdministrador();
         
         $procedimiento = "EXEC sp_insertar_producto @nombre_ = ?, @descripcion_ = ?, @precio_ = ?, @valor_en_puntos_ = ?, @puntos_otorgados_ = ?, @cedula_administrador = ?";        
 	
         $parametros = array(
-            array(&$nombreProducto, SQLSRV_PARAM_IN),
+            array(&$nombre, SQLSRV_PARAM_IN),
             array(&$descripcion, SQLSRV_PARAM_IN),
-            array(&$$precioProducto, SQLSRV_PARAM_IN),
-            array(&$valorPuntos, SQLSRV_PARAM_IN),
-            array(&$puntosOtorga, SQLSRV_PARAM_IN),
-            array(&$cedulaAdministrador, SQLSRV_PARAM_IN),
+            array(&$precio, SQLSRV_PARAM_IN),
+            array(&$puntos, SQLSRV_PARAM_IN),
+            array(&$otorga, SQLSRV_PARAM_IN),
+            array(&$cedula, SQLSRV_PARAM_IN)
         );
 
         $query = sqlsrv_prepare($this->conn, $procedimiento, $parametros);
@@ -367,5 +367,132 @@ class DefaultModel {
             die(print_r(sqlsrv_errors(), true));
         }
         sqlsrv_execute($query);
+    }
+    
+    public function buscarProducto($nombreProducto) {
+        $procedimiento = "EXEC sp_obtener_producto @nombre_producto_ = ?";
+        $parametros = array(
+            array(&$nombreProducto, SQLSRV_PARAM_IN),
+        );
+        
+        $query = sqlsrv_prepare($this->conn, $procedimiento, $parametros);
+
+        if ($query == false) {
+            echo "Error in executing statement 3.\n";
+            die(print_r(sqlsrv_errors(), true));
+        }
+        $rows = sqlsrv_query($this->conn, $procedimiento, $parametros);
+
+        $arr[] = sqlsrv_fetch_array($rows, SQLSRV_FETCH_ASSOC);
+        $productoEncontrado = null;
+        if (!empty($arr[0])) {                       
+            foreach ($arr as $producto) {
+                $productoEncontrado = new Producto($producto["nombre"], $producto["descripcion"], $producto["precio"], $producto["valor_en_puntos"], $producto["puntos_otorgador"], 0);
+            }            
+        }             
+        return $productoEncontrado;
+    }
+
+    public function buscarTodosLosProductos() {
+        $procedimiento = "EXEC sp_obtener_todos_productos";
+
+        $query = sqlsrv_prepare($this->conn, $procedimiento);
+
+        if ($query == false) {
+            echo "Error in executing statement 3.\n";
+            die(print_r(sqlsrv_errors(), true));
+        }
+        $rows = sqlsrv_query($this->conn, $procedimiento);
+
+        $empleados = array();
+        while ($arr = sqlsrv_fetch_array($rows, SQLSRV_FETCH_ASSOC)) {
+            $productoEncontrado = new Producto($arr["nombre"], $arr["descripcion"], $arr["precio"], $arr["valor_en_puntos"], $arr["puntos_otorgador"], 0);            
+            array_push($empleados, $productoEncontrado);
+        }
+        return $empleados;
+    }
+    
+    public function eliminarProducto($nombreProducto) {
+        $procedimiento = "EXEC sp_eliminar_producto @nombre_producto_ = ?";        
+        $parametros = array(
+            array(&$nombreProducto, SQLSRV_PARAM_IN)
+        );
+
+        $query = sqlsrv_prepare($this->conn, $procedimiento, $parametros);
+        if ($query == false) {
+            echo "Error in executing statement 3.\n";
+            die(print_r(sqlsrv_errors(), true));
+        }
+        sqlsrv_query($this->conn, $procedimiento, $parametros);
+    }
+    
+    public function modificarProducto($producto) {
+        $nombre = $producto->getNombre();
+        $descripcion = $producto->getDescripcion();
+        $precio = $producto->getPrecio();
+        $puntos = $producto->getValorPuntos();
+        $otorga = $producto->getPuntosOtorga();
+        
+        $procedimiento = "EXEC sp_modificar_producto @nombre_producto_ = ?, @descripcion_producto_ = ?, @precio = ?, @valor_en_puntos = ?, @puntos_otorgados_ = ?";
+        $parametros = array(
+            array(&$nombre, SQLSRV_PARAM_IN),
+            array(&$descripcion, SQLSRV_PARAM_IN),
+            array(&$precio, SQLSRV_PARAM_IN),
+            array(&$puntos, SQLSRV_PARAM_IN),
+            array(&$otorga, SQLSRV_PARAM_IN)
+        );
+        $query = sqlsrv_prepare($this->conn, $procedimiento, $parametros);
+        if ($query == false) {
+            echo "Error in executing statement 3.\n";
+            die(print_r(sqlsrv_errors(), true));
+        }
+        sqlsrv_query($this->conn, $procedimiento, $parametros);
+    }
+    
+    public function buscarInventario($nombreProducto) {
+        $procedimiento = "EXEC sp_obtener_inventario @nombre_producto_ = ?";
+        $parametros = array(
+            array(&$nombreProducto, SQLSRV_PARAM_IN),
+        );
+        
+        $query = sqlsrv_prepare($this->conn, $procedimiento, $parametros);
+
+        if ($query == false) {
+            echo "Error in executing statement 3.\n";
+            die(print_r(sqlsrv_errors(), true));
+        }
+        $rows = sqlsrv_query($this->conn, $procedimiento, $parametros);
+
+        $arr[] = sqlsrv_fetch_array($rows, SQLSRV_FETCH_ASSOC);
+        $productoEncontrado = null;
+        if (!empty($arr[0])) {                       
+            foreach ($arr as $producto) {
+                $productoEncontrado = new Inventario($producto["producto_nombre"], $producto["cant_existencia"], $producto["cant_adquirida"], $producto["cant_vendida"], $producto["administrador_cedula"]);
+            }            
+        }             
+        return $productoEncontrado;
+    }
+    
+    public function modificarInventario($inventario) {
+        $nombre = $inventario->getNombre();
+        $existencia = $inventario->getExistencia();
+        $adquirida = $inventario->getAquirida();
+        $vendida = $inventario->getVendida();
+        $administrador = $inventario->getCedulaAdministrador();
+        
+        $procedimiento = "EXEC sp_modificar_inventario @producto_nombre_ = ?, @cant_existencia_ = ?, @cant_adquirida_ = ?, @cant_vendida_ = ?, @cedula_administrador_ = ?";
+        $parametros = array(
+            array(&$nombre, SQLSRV_PARAM_IN),
+            array(&$existencia, SQLSRV_PARAM_IN),
+            array(&$adquirida, SQLSRV_PARAM_IN),
+            array(&$vendida, SQLSRV_PARAM_IN),
+            array(&$administrador, SQLSRV_PARAM_IN)
+        );
+        $query = sqlsrv_prepare($this->conn, $procedimiento, $parametros);
+        if ($query == false) {
+            echo "Error in executing statement 3.\n";
+            die(print_r(sqlsrv_errors(), true));
+        }
+        sqlsrv_query($this->conn, $procedimiento, $parametros);
     }
 }

@@ -3,6 +3,7 @@
 include_once 'model/DefaultModel.php';
 include_once 'core/Cliente.php';
 include_once 'core/Empleado.php';
+include_once 'core/Inventario.php';
 include_once 'core/Producto.php';
 include_once 'core/Inventory.php';
 
@@ -137,8 +138,8 @@ class DefaultController {
         if(isset($_GET['ModificarEmpleado'])){
             if($_GET["ModificarEmpleado"] == "modificar"){
                 $idEmpleado = $_GET["id"];
-                $empleadoModificar = new Empleado($idEmpleado, $_POST["tNombre"], $_POST["tApellidos"], $_POST["tFecha"]);
-                $this->model->modificarEmpleado($empleadoModificar);
+                $productoModificar = new Empleado($idEmpleado, $_POST["tNombre"], $_POST["tApellidos"], $_POST["tFecha"]);
+                $this->model->modificarEmpleado($productoModificar);
             }
             if($_GET["ModificarEmpleado"] == "buscar"){
                 $idEmpleado = $_POST["tCedula"];
@@ -153,14 +154,70 @@ class DefaultController {
             }
             include 'view/InsertarProducto.php';
         }
+        if(isset($_GET['BuscarProducto'])){
+            if($_GET['BuscarProducto'] == 'buscar'){
+                if(isset($_GET["modificarProducto"])){
+                    $nombreProducto = $_GET["modificarProducto"];                    
+                    $resultadoBusqueda = $this->model->buscarProducto($nombreProducto);
+                    include 'view/ModificarProducto.php';
+                } else if(isset($_GET["eliminarProducto"])){
+                    $nombreProducto = $_GET["eliminarProducto"];
+                    $resultadoBusqueda = $this->model->buscarProducto($nombreProducto);
+                    include 'view/EliminarProducto.php';
+                } else{
+                    $nombreProducto = $_POST["tCedula"];                    
+                    if($nombreProducto == ""){
+                        $resultadoBusqueda = $this->model->buscarTodosLosProductos();                    
+                    }else{                        
+                        $resultadoBusqueda = $this->model->buscarProducto($nombreProducto);
+                    }
+                    include 'view/BuscarProducto.php';
+                }
+            }else {
+                include 'view/BuscarProducto.php';
+            }
+        }
+        if(isset($_GET['EliminarProducto'])){
+            if($_GET["EliminarProducto"] == "eliminar"){
+                $idEmpleado= $_GET["id"];                
+                $this->model->eliminarProducto($idEmpleado);
+            }
+            if($_GET["EliminarProducto"] == "buscar"){
+                $idEmpleado = $_POST["tCedula"];
+                $resultadoBusqueda = $this->model->buscarProducto($idEmpleado);                
+                
+            }
+            include 'view/EliminarProducto.php';
+        }
+        if(isset($_GET['ModificarProducto'])){
+            if($_GET["ModificarProducto"] == "modificar"){
+                $nombreProducto = $_GET["id"];
+                $productoModificar = new Producto($nombreProducto, $_POST["tDescripcion"], $_POST["tPrecio"], $_POST["tPuntos"], $_POST["tOtorga"], 0);
+                $this->model->modificarProducto($productoModificar);
+            }
+            if($_GET["ModificarProducto"] == "buscar"){
+                $nombreProducto = $_POST["tCedula"];
+                $resultadoBusqueda = $this->model->buscarProducto($nombreProducto);
+            }
+            include 'view/ModificarProducto.php';
+        }
         if (isset($_GET['EmpleadoMes'])) {
             if($_GET["EmpleadoMes"] == "empleadomes"){
                 $empleadoMes =  $this->model->EmpleadoMes();                   
             }
             include 'view/ObtenerEmpleadoMes.php';
         }
-        if(isset($_GET['facturar'])){
-            
+        if(isset($_GET['ModificarInventario'])){
+            if($_GET["ModificarInventario"] == "modificar"){
+                $nombreProducto = $_GET["id"];
+                $productoModificar = new Inventario($nombreProducto, $_POST["tExistencia"], $_POST["tAdquirida"], $_POST["tVendida"], $_POST["tCodigoAdministrador"]);
+                $this->model->modificarInventario($productoModificar);
+            }
+            if($_GET["ModificarInventario"] == "buscar"){
+                $nombreProducto = $_POST["tCedula"];
+                $resultadoBusqueda = $this->model->buscarInventario($nombreProducto);
+            }
+            include 'view/ModificarInventario.php';
         } else {
             include 'view/indexView.php';
         }
