@@ -10,10 +10,10 @@ include_once 'header.php';
                 <div class="col-sm-4"></div>
                 <div class="col-sm-4">
                     <div class="boxed" id="divContenedorIngreso">
-                        <br/><br/><br/>
+                        <br/><br/>
                         <form action="?InsertarProductoFactura=ingresar" method="post">
                             <div class="form-group">
-                                <label>Ingrese La factura y el producro asociado</label>
+                                <label>Ingrese la factura y el producto asociado</label><br/><br/>
                                 <label for="id_factura">Identificacion de la factura</label>
                                 <input  class="form-control" type="text" id="id_factura" name="id_factura" required/>                  
                             </div><div class="form-group">

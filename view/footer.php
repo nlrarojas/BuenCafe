@@ -2,9 +2,10 @@
             <div id="divFooter">
                 <br/><br/>
                 <p>
-                    Footer
+                    Cafetería Buen Café<br/>
+                    Nelson Rojas, Juan Carlos Mora<br/>
+                    Bases de Datos 2017
                     <br/>
-                    Teléfono: #
                 </p>
             </div>
         </footer>

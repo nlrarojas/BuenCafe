@@ -23,7 +23,7 @@ include_once 'header.php';
 
                         <form action="?InsertarClientes=ingresar" method="post">
                             <div class="form-group">
-                                <label>Ingrese los datos del cliente:</label>
+                                <label>Ingrese los datos del cliente:</label><br/>
                                 <label for="tApellido2">Cédula</label>
                                 <input  class="form-control" type="text" id="tCedula" name="tCedula" required/>                  
                             </div><div class="form-group">

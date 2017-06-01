@@ -32,10 +32,12 @@
                     <ul>
                         <div class="btn-group">
                         <li><a class="btn btn-primary"  href="index.php">Inicio</a></li>
-                        <li><a class="btn btn-primary" href="?Inventario">Inventario</a></li>
-                        <li><a class="btn btn-primary" href="?Reporte">Reporte</a></li>
-                        <li><a class="btn btn-primary" href="?InsertarClientes">Insertar Clientes</a></li>
+                        <li><a class="btn btn-primary" href="?Inventario">Inventario/Reporte</a></li>
+                        <li><a class="btn btn-primary" href="?insertarEmpleado">Empleados</a></li>
+                        <li><a class="btn btn-primary" href="?InsertarClientes">Clientes</a></li>
                         <li><a class="btn btn-primary" href="?InsertarProductos">Productos</a></li>
+                        <li><a class="btn btn-primary" href="?facturar">Facturar</a></li>
+                        <li><a class="btn btn-primary" href="?EmpleadoMes">Empleado del mes</a></li>
                         <li><a class="btn btn-primary" href="?InsertarProductoFactura">Producto Asociado a Factura</a></li>
                         </div>
                     </ul>

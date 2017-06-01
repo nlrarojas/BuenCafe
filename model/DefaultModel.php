@@ -26,7 +26,7 @@ class DefaultModel {
         
         $query = sqlsrv_prepare($this->conn, $procedimiento, $parametros);
 
-        if ($query === false) {
+        if ($query == false) {
             echo "Error in executing statement 3.\n";
             die(print_r(sqlsrv_errors(), true));
         }
@@ -51,7 +51,7 @@ class DefaultModel {
 
         $query = sqlsrv_prepare($this->conn, $procedimiento, $parametros);
 
-        if ($query === false) {
+        if ($query == false) {
             echo "Error in executing statement 3.\n";
             die(print_r(sqlsrv_errors(), true));
         }
@@ -66,7 +66,7 @@ class DefaultModel {
 
         $query = sqlsrv_prepare($this->conn, $procedimiento, $parametros);
         
-        if ($query === false) {
+        if ($query == false) {
             echo "Error in executing statement 3.\n";
             die(print_r(sqlsrv_errors(), true));
         }
@@ -87,7 +87,7 @@ class DefaultModel {
 
         $query = sqlsrv_prepare($this->conn, $procedimiento);
         
-        if ($query === false) {
+        if ($query == false) {
             echo "Error in executing statement 3.\n";
             die(print_r(sqlsrv_errors(), true));
         }
@@ -116,7 +116,7 @@ class DefaultModel {
             array(&$premios, SQLSRV_PARAM_IN)
         );
         $query = sqlsrv_prepare($this->conn, $procedimiento, $parametros);        
-        if ($query === false) {
+        if ($query == false) {
             echo "Error in executing statement 3.\n";
             die(print_r(sqlsrv_errors(), true));
         }        
@@ -130,7 +130,7 @@ class DefaultModel {
         );
         
         $query = sqlsrv_prepare($this->conn, $procedimiento, $parametros);        
-        if ($query === false) {
+        if ($query == false) {
             echo "Error in executing statement 3.\n";
             die(print_r(sqlsrv_errors(), true));
         }        
@@ -142,7 +142,7 @@ class DefaultModel {
 
         $query = sqlsrv_prepare($this->conn, $procedimiento);
         
-        if ($query === false) {
+        if ($query == false) {
             echo "Error in executing statement 3.\n";
             die(print_r(sqlsrv_errors(), true));
         }
@@ -154,5 +154,56 @@ class DefaultModel {
             array_push($inventario, $inventarioEncontrado);
         }
         return $inventario;
+    }
+    
+    public function insertarEmpleado($tipoEmpleado, $nuevoEmpleado) {
+        $idEmpleado = $nuevoEmpleado->getId(); $nombreEmpleado = $nuevoEmpleado->getNombre();
+        $apellidosEmpleado = $nuevoEmpleado->getApellidos(); $fechaEmpleado = $nuevoEmpleado->getFecha(); $funcion = "Caja";
+        
+        if($tipoEmpleado == 1){
+           $procedimiento = "EXEC sp_insert ar_vendedor  @id_trabajador_ = ?, @nombre_ = ?, @apellidos_ = ?, @fecha_nacimiento_ = ?, @funcion = ?";
+           $parametros = array(
+                array(&$idEmpleado, SQLSRV_PARAM_IN),
+                array(&$nombreEmpleado, SQLSRV_PARAM_IN),
+                array(&$apellidosEmpleado, SQLSRV_PARAM_IN),
+                array(&$fechaEmpleado, SQLSRV_PARAM_IN),
+                array(&$funcion, SQLSRV_PARAM_IN)
+            );
+        }else{
+            $procedimiento = "EXEC sp_insertar_administrador @id_trabajador_ = ?, @nombre_ = ?, @apellidos_ = ?, @fecha_nacimiento_ = ?";
+            $parametros = array(
+                array(&$idEmpleado, SQLSRV_PARAM_IN),
+                array(&$nombreEmpleado, SQLSRV_PARAM_IN),
+                array(&$apellidosEmpleado, SQLSRV_PARAM_IN),
+                array(&$fechaEmpleado, SQLSRV_PARAM_IN)               
+            );
+        }
+        
+        
+        $query = sqlsrv_prepare($this->conn, $procedimiento, $parametros);
+
+        if ($query == false) {
+            echo "Error in executing statement 3.\n";
+            die(print_r(sqlsrv_errors(), true));
+        }
+        sqlsrv_execute($query);
+    }
+    
+    public function EmpleadoMes (){
+        $procedimiento = "EXEC sp_empleado_del_mes";
+        
+        $query = sqlsrv_prepare($this->conn, $procedimiento);
+        
+        if ($query === false) {
+            echo "Error in executing statement 3.\n";
+            die(print_r(sqlsrv_errors(), true));
+        }
+        $rows = sqlsrv_query($this->conn, $procedimiento);
+
+        $empleado = sqlsrv_fetch_array($rows, SQLSRV_FETCH_ASSOC);
+        
+        $empleadoMes = $empleado["nombre"].$empleado["apellidos"].$empleado["id_trabajador"];
+            
+        return $empleadoMes;
     }
 }

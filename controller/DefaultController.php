@@ -2,6 +2,7 @@
 
 include_once 'model/DefaultModel.php';
 include_once 'core/Cliente.php';
+include_once 'core/Empleado.php';
 include_once 'core/Inventory.php';
 
 class DefaultController {
@@ -15,7 +16,8 @@ class DefaultController {
     public function invoke() {
         if (isset($_GET['Ventas'])) {
             include "view/Ventas.php";
-        } else if (isset($_GET['InsertarClientes'])) {
+        }
+        if (isset($_GET['InsertarClientes'])) {
             if ($_GET['InsertarClientes'] == 'ingresar') {
                 $nuevoCliente = new Cliente($_POST["tCedula"], $_POST["tNombre"], $_POST["tApellidos"], $_POST["tFecha"], 0, 0);
                 $this->model->insertarCliente($nuevoCliente);
@@ -83,6 +85,30 @@ class DefaultController {
             }else{
                 include 'view/BuscarClientes.php';
             }
+        } 
+        if(isset($_GET['insertarEmpleado'])){
+            if($_GET['insertarEmpleado'] == 'ingresar'){
+                $tipoEmpleado = $_POST['tipoEmpleado'];
+                $nuevoEmpleado = new Empleado($_POST["tCedula"], $_POST["tNombre"], $_POST["tApellidos"], $_POST["tFecha"]);
+                if($tipoEmpleado == "vendedor"){
+                    $this->model->insertarEmpleado(1, $nuevoEmpleado);
+                }else{
+                    $this->model->insertarEmpleado(2, $nuevoEmpleado);
+                }
+            }
+            include 'view/InsertarEmpleado.php';
+        }
+        if(isset($_GET['InsertarProductos'])){
+            
+        }
+        if (isset($_GET['EmpleadoMes'])) {
+            if($_GET["EmpleadoMes"] == "empleadomes"){
+                $empleadoMes =  $this->model->EmpleadoMes();                   
+            }
+            include 'view/ObtenerEmpleadoMes.php';
+        }
+        if(isset($_GET['facturar'])){
+            
         } else {
             include 'view/indexView.php';
         }
