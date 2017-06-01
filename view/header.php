@@ -39,6 +39,7 @@
                         <li><a class="btn btn-primary" href="?ModificarInventario">Modificar inventario</a></li>
                         <li><a class="btn btn-primary" href="?EmpleadoMes">Empleado del mes</a></li>
                         <li><a class="btn btn-primary" href="?InsertarProductoFactura">Producto Asociado a Factura</a></li>
+                        <li><a class="btn btn-primary" href="?Factura">Factura</a></li>
                         </div>
                     </ul>
                 </nav>	

@@ -218,7 +218,19 @@ class DefaultController {
                 $resultadoBusqueda = $this->model->buscarInventario($nombreProducto);
             }
             include 'view/ModificarInventario.php';
-        } else {
+        }
+        if(isset($_GET['Factura'])){
+            if($_GET["Factura"] == "ingresar"){
+                
+            }else{
+                $resultadoClientes = $this->model->buscarTodosLosClientes();
+                $resultadoVendedores = $this->model->buscarTodosLosEmpleados();
+                $resultadoProductos = $this->model->buscarTodosLosProductos();
+                $fechaActual = new DateTime();
+                $fechaActual = $fechaActual->format('Y-m-d');
+            }
+            include 'view/Facturacion.php';
+        }else {
             include 'view/indexView.php';
         }
     }
